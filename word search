@@ -1,0 +1,37 @@
+class Solution {
+    public boolean solve(char[][] board,int i,int j,int row,int col,String word, int ind){
+        //base case
+        if(ind==word.length()){
+            return true;
+        }
+        if(i==-1|| j==-1 ||i==row || j== col|| board[i][j] != word.charAt(ind)){
+            return false;
+        }
+        char temp=board[i][j];
+        board[i][j]='*';
+        boolean res= (solve(board,i+1,j,row,col,word,ind+1)||
+        solve(board,i-1,j,row,col,word,ind+1)||
+        solve(board,i,j-1,row,col,word,ind+1)||
+        solve(board,i,j+1,row,col,word,ind+1));
+        board[i][j]=temp;
+        return res;
+    }
+    public boolean exist(char[][] board, String word) {
+        //char [] ch = word.toCharArray();
+        int row= board.length;
+        int col = board[0].length;
+        int flag=0;
+        for(int i=0;i<row;i++)
+        {
+            for(int j=0;j<col;j++)
+            {
+           if(solve(board,i,j,row,col,word,0)==true)
+            {
+              return true;
+              
+            }
+            }
+        }
+        return false;
+    }
+}
