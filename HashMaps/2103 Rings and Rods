@@ -1,0 +1,22 @@
+class Solution {
+    public int countPoints(String rings) {
+        HashMap<Integer, HashSet<Character>> hm = new HashMap<>();
+        int count=0;
+        int n = rings.length();
+        for(int i=0;i<n/2;i++){
+            int rods = (int)rings.charAt(2*i+1);
+            char ring = rings.charAt(2*i);
+            //add the hashset once for a particular rod
+            hm.putIfAbsent(rods,new HashSet<>());
+            hm.get(rods).add(ring);
+        }
+        for(HashSet<Character> hs:hm.values()){
+            if(hs.size()>2){
+                count++;
+            }
+        }
+    
+        
+        return count;
+    }
+}
