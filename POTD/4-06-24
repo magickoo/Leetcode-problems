@@ -1,0 +1,21 @@
+409 Longest Palindrome
+class Solution {
+    public int longestPalindrome(String s) {
+        int oddcnt=0;
+        int n= s.length();
+        int arr[] = new int[128];
+        for(char c: s.toCharArray()){
+            arr[c]++;
+            if(arr[c]% 2 == 1){
+                oddcnt ++;
+            }
+            else{
+                oddcnt--;
+            }
+        }
+        if(oddcnt > 0){
+            return (n+1) - oddcnt;
+        }
+        return n;
+    }
+}
